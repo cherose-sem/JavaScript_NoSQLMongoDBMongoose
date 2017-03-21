@@ -33,6 +33,7 @@ db.connect(connection_string,function(err){
     return;
   } else
   {
+    console.log("Listening to " + port);
      server.listen(port);
      server.on('error', onError);
      server.on('listening', onListening);

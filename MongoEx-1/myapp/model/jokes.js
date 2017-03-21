@@ -1,10 +1,9 @@
 
 var connection = require("../db/db");
 var assert = require('assert');
-var url = "mongodb://localhost:27017/jokes";
 var ObjectId = require('mongodb').ObjectID;
 
-function allJokes(callback) {
+allJokes = function (callback) {
     // Get the Document Collection:
     let database = connection.get();
         let collection = database.collection('jokes');
@@ -16,7 +15,7 @@ function allJokes(callback) {
 
 }
 
-function findJoke (id, callback) { 
+findJoke = function (id, callback) { 
 let database = connection.get();
     let collection = database.collection("jokes");
     collection.findOne({"_id" : new ObjectId(id)}, (function (err,data){
@@ -34,7 +33,8 @@ addJoke = function (jokeToAdd, callback) {
             callback(data);
         }))
  };
-function editJoke (jokeToEdit, callback) {
+ 
+editJoke = function (jokeToEdit, callback) {
     let database = connection.get();
         let collection = database.collection("jokes");
         collection.update({_id : new ObjectId(jokeToEdit._id)}, {$set: {joke: jokeToEdit.joke}}, 
@@ -43,6 +43,7 @@ function editJoke (jokeToEdit, callback) {
                 callback(data);
             }));
  };
+
 deleteJoke = function (id, callback) {
      let database = connection.get();
         let collection = database.collection("jokes");
@@ -51,14 +52,15 @@ deleteJoke = function (id, callback) {
             callback(data);
         })); 
  };
+
 randomJoke = function randomJoke(callback) {
     let database = connection.get();
         let collection = database.collection("jokes");
         collection.find().toArray(function (err, data) {
             assert.equal(err, null);
-            let lengthofArray = data.length;
-            let randomnum = Math.floor((Math.random() * lengthofArray));
-            callback(data[randomnum]);
+            let l = data.length;
+            let rnd = Math.floor((Math.random() * l));
+            callback(data[rnd]);
         })
  };
 
