@@ -1,6 +1,8 @@
 let express = require("express");
 let app = express();
 let bodyParser = require("body-parser");
+require("./models/jokes");
+let path = require('path');
 let logger = require('morgan');
 let api = require("./api/api");
 app.set("json spaces", 2);
@@ -9,10 +11,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use("/api",api);
-
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  let err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
@@ -31,5 +33,3 @@ function initMongoose(dbConnection){
 app.initMongoose = initMongoose;
 
 module.exports = app;
-
-
