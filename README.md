@@ -60,14 +60,23 @@ MongoDB can return sorted results by using the ordering in the index.
 SEE jokes.js (facade) for examples.
 
 #### Explain, using your own code examples, how you have used some of MongoDB's "special" indexes like TTL and 2dsphere
+TTL indexes are special single-field indexes that MongoDB can use to automatically remove documents from a collection after a certain amount of time. Data expiration is useful for certain types of information like machine generated event data, logs, and session information that only need to persist in a database for a finite amount of time.
 
+As part of the joke document property, lastEdited, takes a date but not really with such expiration.
 
 #### Demonstrate, using a REST-API you have designed, how to perform all CRUD operations on a MongoDB
+See jokeAPI.js, it simply used a router ang implemment get, post, put and delete.. do something with the joke through the jokes.js as the facade and sends the response as json string.
 
 #### Explain the benefits from using Mongoose, and provide an example involving all CRUD operations
+Mongoose allows us to have access to the MongoDB commands for CRUD simply and easily. See the documentation.
 
 #### Explain the benefits from using Mongoose, and demonstrate, using your own code, an example involving all CRUD operations
+Mongoose allows us to have access to the MongoDB commands for CRUD simply and easily. See the mongoose exercise implementation.
 
 #### Explain how redis "fits" into the NoSQL world, and provide an example of how you have used it.
+When your customer or user logs in, they authenticate and receive a token. This token then allows them to interact with any server in your web tier - the token is sent each time. There is no need for a "master" server and "slave" servers, because each server is the same. This allows you to scale horizontally very easily. 
+
+The session data is then stored in a fast database like Redis.
 
 #### Explain, using a relevant example, a full MEAN application (the A, can be an ionic application) including relevant test cases to test the REST-API (not on the production database)
+See my first simple MEAN application in MongoEx-1/myapp.
